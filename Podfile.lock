@@ -1,0 +1,17 @@
+
+SPEC CHECKSUMS: 
+  SVProgressHUD: 98935fbafaf0031df4a9cafca3c66eaf3da06967
+  AFNetworking: df1042246c17373b96f12f04bf5c6e1c25992cd4
+  SBJson: 0c76c1e4ec7c4fbf9c9c0d9fa78cb3c5743cbe9a
+
+DEPENDENCIES: 
+- AFNetworking (= 0.10.1)
+- SBJson (= 3.1)
+- SVProgressHUD
+
+COCOAPODS: 0.16.4
+
+PODS: 
+- AFNetworking (0.10.1)
+- SBJson (3.1)
+- SVProgressHUD (0.9)
