@@ -146,8 +146,8 @@
 				5701C0561702C8DF004DCF9C /* TitleDescriptionCell.m */,
 				5701C04C1702C81E004DCF9C /* CRLColorDetailViewController.h */,
 				5701C04D1702C81E004DCF9C /* CRLColorDetailViewController.m */,
-				5701C0421702BD7A004DCF9C /* CRLViewController.h */,
 				5701C0431702BD7A004DCF9C /* CRLViewController.m */,
+				5701C0421702BD7A004DCF9C /* CRLViewController.h */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

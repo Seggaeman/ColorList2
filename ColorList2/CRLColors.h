@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <iActiveRecord/ActiveRecord.h>
 
-@interface CRLColors : NSObject
+@interface CRLColors : ActiveRecord
 
 @property (strong, nonatomic) NSString* title;
 @property (strong, nonatomic) NSString* userName;

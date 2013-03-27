@@ -24,6 +24,7 @@
 {
     if (self= [super init])
     {
+        self.id = ipDictionary[@"id"];
         self->_title = ipDictionary[@"title"];
         self->_userName = ipDictionary[@"userName"];
         self->_colorString = ipDictionary[@"hex"];

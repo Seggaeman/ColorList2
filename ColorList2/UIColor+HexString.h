@@ -10,4 +10,5 @@
 
 @interface UIColor (HexString)
 + (UIColor*)colorWithHexString:(NSString*)hexString inverted:(BOOL)status;
++ (UIColor*)contrastAdaptedColor:(UIColor*)ipColor;
 @end

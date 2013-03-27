@@ -15,6 +15,9 @@
 #import "CRLColorDetailViewController.h"
 
 @interface CRLViewController ()
+{
+    NSMutableArray* colors;
+}
 
 @end
 
@@ -25,8 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self->colors = [NSMutableArray array];
-        NSLog(@"init");    
+        self->colors = [[CRLColors allRecords] mutableCopy];
     }
     return self;
 }
@@ -38,7 +40,6 @@
     //possibly because self.tableView hasn't been generated yet at that point.
     self.tableView.rowHeight = 80.0;
     [self.tableView registerNib:[UINib nibWithNibName:@"TitleDescriptionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"TitleDescriptionCell"];
-    
     // Do any additional setup after loading the view.
 }
 
@@ -52,14 +53,16 @@
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^void(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             //NSLog(@"%@", [JSON class]); the class is of type NSMutableArray. Apparently using SBJson won't be necessary.
             //save the color array.
-            //NSLog(@"%@", JSON);
-            self->colors = JSON;
+            [(NSMutableArray*)JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                CRLColors* colorInstance = [[CRLColors newRecord] initWithDictionary:(NSDictionary*)obj];
+                [colorInstance save];
+                [self->colors addObject:colorInstance];
+            }];
             [self.tableView reloadData];
             [SVProgressHUD showSuccessWithStatus:@"Done"];
         }
         failure:^void(NSURLRequest *request, NSHTTPURLResponse* response, NSError* error, id JSON) {
-            NSLog(@"%@", error);
-            [SVProgressHUD showErrorWithStatus:@"Erreur"];
+            [SVProgressHUD showErrorWithStatus:[error description]];
         }];
         [operation start];
         [SVProgressHUD showWithStatus:@"Loading"];
@@ -84,25 +87,22 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CRLColors* theColor = [[CRLColors alloc] initWithDictionary:self->colors[indexPath.row]];
+    CRLColors* theColor = self->colors[indexPath.row];
     
     TitleDescriptionCell* theCell= [tableView dequeueReusableCellWithIdentifier:@"TitleDescriptionCell"];
     theCell.titleLabel.text = theColor.title;
     theCell.userNameLabel.text = theColor.userName;
     [theCell.colorView setBackgroundColor:[UIColor colorWithHexString:theColor.colorString inverted:NO]];
     
-    UIView *selectionColor = [[UIView alloc] init];
-    selectionColor.backgroundColor = [UIColor colorWithHexString:theColor.colorString inverted:NO];
-    theCell.selectedBackgroundView = selectionColor;
-    
     return theCell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CRLColors* colorInst= [[CRLColors alloc] initWithDictionary:self->colors[indexPath.row]];
+    CRLColors* colorInst= self->colors[indexPath.row];
     CRLColorDetailViewController* leControlleur= [[CRLColorDetailViewController alloc] init];
     leControlleur.colorInstance = colorInst;
     [self.navigationController pushViewController:leControlleur animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 @end

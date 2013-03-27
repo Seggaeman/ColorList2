@@ -7,14 +7,18 @@
 //
 
 #import "TitleDescriptionCell.h"
-
+#import "UIColor+HexString.h"
 @implementation TitleDescriptionCell
-
+{
+    UIColor* blackTextColor, *greyTextColor;
+}
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         NSLog(@"cell init");
+        self->blackTextColor = self.titleLabel.textColor;
+        self->greyTextColor = self.userNameLabel.textColor;
         // Initialization code
         //NSArray *nib= [[NSBundle mainBundle] loadNibNamed:@"TitleDescriptionCell" owner:self options:nil];
         //self = nib[0];
@@ -24,9 +28,16 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    [super setSelected:selected animated:animated];
     // Configure the view for the selected state
-    //self.selectedBackgroundView.backgroundColor = self.colorView.backgroundColor;
+    UIView *selectionColor = [[UIView alloc] init];
+    selectionColor.backgroundColor = self.colorView.backgroundColor;
+    self.selectedBackgroundView = selectionColor;
+    
+    self.titleLabel.highlightedTextColor = self.userNameLabel.highlightedTextColor= [UIColor contrastAdaptedColor:self.colorView.backgroundColor];
 }
 
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+    [super setHighlighted:highlighted animated:animated];
+}
 @end

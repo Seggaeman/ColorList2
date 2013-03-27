@@ -23,4 +23,16 @@
     else
         return [UIColor colorWithRed:getColorComp(0,2) green:getColorComp(2,2) blue:getColorComp(4,2) alpha:1.0];
 }
+
++(UIColor*)contrastAdaptedColor:(UIColor *)ipColor
+{
+    
+    const CGFloat* colorComponents = CGColorGetComponents(ipColor.CGColor);
+    if (colorComponents[0] + colorComponents[1] + colorComponents[2] > 0.6 * 3)
+        return [UIColor blackColor];
+    else
+        return [UIColor whiteColor];
+    
+    free((void*)colorComponents);
+}
 @end

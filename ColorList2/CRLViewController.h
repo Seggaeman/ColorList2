@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CRLViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-{
-    NSMutableArray* colors;
-}
 
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
 
