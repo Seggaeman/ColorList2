@@ -12,5 +12,5 @@
 
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
 
-
+-(IBAction)clickedRefresh:(id)sender;
 @end

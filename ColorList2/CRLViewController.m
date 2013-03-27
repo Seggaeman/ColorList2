@@ -19,6 +19,7 @@
     NSMutableArray* colors;
 }
 
+-(void)downloadJSONData;
 @end
 
 @implementation CRLViewController
@@ -39,11 +40,17 @@
     //application was crashing when this was placed in initWithNibName:bundle:
     //possibly because self.tableView hasn't been generated yet at that point.
     self.tableView.rowHeight = 80.0;
-    [self.tableView registerNib:[UINib nibWithNibName:@"TitleDescriptionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"TitleDescriptionCell"];
+    //[self.tableView registerNib:[UINib nibWithNibName:@"TitleDescriptionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"TitleDescriptionCell"];
     // Do any additional setup after loading the view.
 }
 
 -(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self downloadJSONData];
+}
+
+-(void)downloadJSONData
 {
     //download JSON only if content array is empty
     if ([self->colors count] == 0)
@@ -62,12 +69,20 @@
             [SVProgressHUD showSuccessWithStatus:@"Done"];
         }
         failure:^void(NSURLRequest *request, NSHTTPURLResponse* response, NSError* error, id JSON) {
-            [SVProgressHUD showErrorWithStatus:[error description]];
+              [SVProgressHUD showErrorWithStatus:[error description]];
         }];
         [operation start];
-        [SVProgressHUD showWithStatus:@"Loading"];
+        [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeGradient];
     }
 }
+
+-(IBAction)clickedRefresh:(id)sender
+{
+    [self->colors removeAllObjects];
+    [CRLColors clearDatabase];    
+    [self downloadJSONData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -90,6 +105,11 @@
     CRLColors* theColor = self->colors[indexPath.row];
     
     TitleDescriptionCell* theCell= [tableView dequeueReusableCellWithIdentifier:@"TitleDescriptionCell"];
+    
+    if(theCell == nil)
+    {
+        theCell = [[TitleDescriptionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TitleDescriptionCell"];
+    }
     theCell.titleLabel.text = theColor.title;
     theCell.userNameLabel.text = theColor.userName;
     [theCell.colorView setBackgroundColor:[UIColor colorWithHexString:theColor.colorString inverted:NO]];

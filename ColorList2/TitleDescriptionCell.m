@@ -16,12 +16,11 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        NSLog(@"cell init");
+        // Initialization code
+        NSArray *nib= [[NSBundle mainBundle] loadNibNamed:@"TitleDescriptionCell" owner:self options:nil];
+        self = nib[0];
         self->blackTextColor = self.titleLabel.textColor;
         self->greyTextColor = self.userNameLabel.textColor;
-        // Initialization code
-        //NSArray *nib= [[NSBundle mainBundle] loadNibNamed:@"TitleDescriptionCell" owner:self options:nil];
-        //self = nib[0];
     }
     return self;
 }
