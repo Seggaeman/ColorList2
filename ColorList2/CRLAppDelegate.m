@@ -7,13 +7,16 @@
 //
 
 #import "CRLAppDelegate.h"
-
+#import "CRLViewController.h"
 @implementation CRLAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    self.navController = [[UINavigationController alloc] initWithRootViewController:[[CRLViewController alloc] initWithNibName:@"CRLViewController" bundle:[NSBundle mainBundle]]];
+    self.window.rootViewController = self.navController;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
