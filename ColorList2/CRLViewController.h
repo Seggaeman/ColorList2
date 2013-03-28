@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CRLViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CRLViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar* searchBar;
 
--(IBAction)clickedRefresh:(id)sender;
 @end

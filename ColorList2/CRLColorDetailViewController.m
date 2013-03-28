@@ -8,6 +8,12 @@
 
 #import "CRLColorDetailViewController.h"
 #import "UIColor+HexString.h"
+#import "URLBuilder.h"
+#import <AFNetworking/AFNetworking.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+#import "NSString+URLEncoding.h"
+#import "User.h"
+
 @interface CRLColorDetailViewController ()
 @property (weak,nonatomic) IBOutlet UIView* colorView;
 @property (weak,nonatomic) IBOutlet UILabel* colorViewLabel;
@@ -39,10 +45,39 @@
     [self.userNameLabel setText:self.colorInstance.userName];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)showDetailsButtonClick:(id)sender
+{
+    //build the url
+    NSString* urlString = [@"http://www.colourlovers.com/api/lover/" stringByAppendingString:[self.colorInstance.userName urlEncodeUsingEncoding:NSUTF8StringEncoding]];
+    urlString = [urlString stringByAppendingString:@"?format=json"];
+    
+    NSLog(@"%@", urlString);
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^void(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        [SVProgressHUD showSuccessWithStatus:@"Done"];
+        //the JSON is a NSMutableArray containing one object. (Assume nevertheless that there can be several users)
+        [(NSMutableArray*)JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            User* colorOwner= [[User alloc] initWithDictionary:(NSDictionary*)obj];
+            NSString* details = [NSString stringWithFormat:@"Username: %@\nRating: %@\nLocation: %@\nNumColors: %@", colorOwner.userName, colorOwner.rating, colorOwner.location, colorOwner.numColors];
+            UIAlertView* detailAlert = [[UIAlertView alloc] initWithTitle:@"Details" message:details delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [detailAlert show];
+        }];
+    }
+    failure:^void(NSURLRequest *request, NSHTTPURLResponse* response, NSError* error, id JSON) {
+        [SVProgressHUD showErrorWithStatus:[error description]];
+    }];
+    [operation start];
+    [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeGradient];
+}
 @end

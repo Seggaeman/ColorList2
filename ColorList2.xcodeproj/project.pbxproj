@@ -24,6 +24,9 @@
 		5701C0541702C8BD004DCF9C /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5701C0531702C8BD004DCF9C /* UIColor+HexString.m */; };
 		5701C0571702C8DF004DCF9C /* TitleDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5701C0561702C8DF004DCF9C /* TitleDescriptionCell.m */; };
 		5701C0591702C8E8004DCF9C /* TitleDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5701C0581702C8E8004DCF9C /* TitleDescriptionCell.xib */; };
+		579CD7E217031FA000F35E3B /* URLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 579CD7E117031FA000F35E3B /* URLBuilder.m */; };
+		579CD7E5170321D400F35E3B /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 579CD7E4170321D400F35E3B /* NSString+URLEncoding.m */; };
+		57F1009817040ED900812F81 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F1009717040ED900812F81 /* User.m */; };
 		E05F92A569D04B12B7B10DDD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A88C66E5BB8B4A67B9A4CFBB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +57,12 @@
 		5701C0551702C8DF004DCF9C /* TitleDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleDescriptionCell.h; sourceTree = "<group>"; };
 		5701C0561702C8DF004DCF9C /* TitleDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleDescriptionCell.m; sourceTree = "<group>"; };
 		5701C0581702C8E8004DCF9C /* TitleDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleDescriptionCell.xib; sourceTree = "<group>"; };
+		579CD7E017031FA000F35E3B /* URLBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLBuilder.h; sourceTree = "<group>"; };
+		579CD7E117031FA000F35E3B /* URLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLBuilder.m; sourceTree = "<group>"; };
+		579CD7E3170321D400F35E3B /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		579CD7E4170321D400F35E3B /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		57F1009617040ED900812F81 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		57F1009717040ED900812F81 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		A88C66E5BB8B4A67B9A4CFBB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C164FC7CBBB846CC8ADBC182 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -105,8 +114,9 @@
 		5701C0211702B32D004DCF9C /* ColorList2 */ = {
 			isa = PBXGroup;
 			children = (
+				579CD7B517031EBC00F35E3B /* Helpers */,
 				5701C0511702C8AB004DCF9C /* Categories */,
-				5701C0481702C796004DCF9C /* Model */,
+				5701C0481702C796004DCF9C /* Models */,
 				5701C0471702BE9A004DCF9C /* AppDelegate */,
 				5701C0411702BD6B004DCF9C /* ViewControllers */,
 				5701C0401702BD62004DCF9C /* UserInterface */,
@@ -161,22 +171,35 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
-		5701C0481702C796004DCF9C /* Model */ = {
+		5701C0481702C796004DCF9C /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5701C0491702C802004DCF9C /* CRLColors.h */,
 				5701C04A1702C802004DCF9C /* CRLColors.m */,
+				57F1009617040ED900812F81 /* User.h */,
+				57F1009717040ED900812F81 /* User.m */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		5701C0511702C8AB004DCF9C /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				579CD7E4170321D400F35E3B /* NSString+URLEncoding.m */,
+				579CD7E3170321D400F35E3B /* NSString+URLEncoding.h */,
 				5701C0521702C8BD004DCF9C /* UIColor+HexString.h */,
 				5701C0531702C8BD004DCF9C /* UIColor+HexString.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		579CD7B517031EBC00F35E3B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				579CD7E017031FA000F35E3B /* URLBuilder.h */,
+				579CD7E117031FA000F35E3B /* URLBuilder.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +296,9 @@
 				5701C04E1702C81E004DCF9C /* CRLColorDetailViewController.m in Sources */,
 				5701C0541702C8BD004DCF9C /* UIColor+HexString.m in Sources */,
 				5701C0571702C8DF004DCF9C /* TitleDescriptionCell.m in Sources */,
+				579CD7E217031FA000F35E3B /* URLBuilder.m in Sources */,
+				579CD7E5170321D400F35E3B /* NSString+URLEncoding.m in Sources */,
+				57F1009817040ED900812F81 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

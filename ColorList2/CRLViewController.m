@@ -13,13 +13,14 @@
 #import "TitleDescriptionCell.h"
 #import "UIColor+HexString.h"
 #import "CRLColorDetailViewController.h"
+#import "URLBuilder.h"
 
 @interface CRLViewController ()
 {
     NSMutableArray* colors;
 }
 
--(void)downloadJSONData;
+-(void)downloadJSONDataFromURL:(NSString*)theURL;
 @end
 
 @implementation CRLViewController
@@ -39,7 +40,6 @@
     [super viewDidLoad];
     //application was crashing when this was placed in initWithNibName:bundle:
     //possibly because self.tableView hasn't been generated yet at that point.
-    self.tableView.rowHeight = 80.0;
     //[self.tableView registerNib:[UINib nibWithNibName:@"TitleDescriptionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"TitleDescriptionCell"];
     // Do any additional setup after loading the view.
 }
@@ -47,18 +47,30 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self downloadJSONData];
+    [self.navigationController setNavigationBarHidden:TRUE animated:YES];
+    //retrieve text from standard user defaults
+    NSUserDefaults* standards= [NSUserDefaults standardUserDefaults];
+    NSString* previousValue= (NSString*)[standards objectForKey:@"keywords"];
+    if (previousValue == nil)
+        [self downloadJSONDataFromURL:@"http://www.colourlovers.com/api/colors/new?format=json"];
+    else
+    {
+        NSDictionary* argumentsDict= @{@"format":@"json", @"keywords":previousValue};
+        NSString* urlString= [URLBuilder serializeURLString:@"http://www.colourlovers.com/api/colors/new?" withArguments:argumentsDict];
+        [self downloadJSONDataFromURL:urlString];
+        [self.searchBar setText:previousValue];
+    }
 }
 
--(void)downloadJSONData
+-(void)downloadJSONDataFromURL:(NSString *)theURL
 {
     //download JSON only if content array is empty
     if ([self->colors count] == 0)
     {
-        NSURL *url = [NSURL URLWithString:@"http://www.colourlovers.com/api/colors/new?format=json"];
+        NSURL *url = [NSURL URLWithString:theURL];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^void(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-            //NSLog(@"%@", [JSON class]); the class is of type NSMutableArray. Apparently using SBJson won't be necessary.
+            NSLog(@"%@", JSON); //the class is of type NSMutableArray. Apparently using SBJson won't be necessary.
             //save the color array.
             [(NSMutableArray*)JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 CRLColors* colorInstance = [[CRLColors newRecord] initWithDictionary:(NSDictionary*)obj];
@@ -69,18 +81,11 @@
             [SVProgressHUD showSuccessWithStatus:@"Done"];
         }
         failure:^void(NSURLRequest *request, NSHTTPURLResponse* response, NSError* error, id JSON) {
-              [SVProgressHUD showErrorWithStatus:[error description]];
+            [SVProgressHUD showErrorWithStatus:[error description]];
         }];
         [operation start];
         [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeGradient];
     }
-}
-
--(IBAction)clickedRefresh:(id)sender
-{
-    [self->colors removeAllObjects];
-    [CRLColors clearDatabase];    
-    [self downloadJSONData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,5 +129,27 @@
     leControlleur.colorInstance = colorInst;
     [self.navigationController pushViewController:leControlleur animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - UISearchBarDelegate methods
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    //register the text in standard user defaults
+    NSUserDefaults* standards= [NSUserDefaults standardUserDefaults];
+    [standards setObject:[searchBar text] forKey:@"keywords"];
+
+    //NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"keywords"]);
+    NSDictionary* argumentsDict= @{@"format":@"json", @"keywords":[searchBar text]};
+    NSString* urlString= [URLBuilder serializeURLString:@"http://www.colourlovers.com/api/colors/new?" withArguments:argumentsDict];
+    
+    [CRLColors clearDatabase];
+    [self->colors removeAllObjects];
+    [self downloadJSONDataFromURL:urlString];
+    [searchBar resignFirstResponder];
+}
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
 }
 @end

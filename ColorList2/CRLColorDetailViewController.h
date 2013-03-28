@@ -13,4 +13,5 @@
 
 @property (strong, nonatomic) CRLColors* colorInstance;
 
+-(IBAction)showDetailsButtonClick:(id)sender;
 @end
