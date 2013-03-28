@@ -8,14 +8,30 @@
 
 #import "CRLAppDelegate.h"
 #import "CRLViewController.h"
+#import "CRLPalettesViewController.h"
+
 @implementation CRLAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.navController = [[UINavigationController alloc] initWithRootViewController:[[CRLViewController alloc] initWithNibName:@"CRLViewController" bundle:[NSBundle mainBundle]]];
-    self.window.rootViewController = self.navController;
+    //[[NSBundle mainBundle] loadNibNamed:@"CRLTabBarController" owner:self options:nil];
+    //self.window.rootViewController = self.tbController;
+    
+    //initialize color list view controller
+    CRLViewController* colorListVC= [[CRLViewController alloc] initWithNibName:@"CRLViewController" bundle:[NSBundle mainBundle]];
+    UINavigationController* colorListNav = [[UINavigationController alloc] initWithRootViewController:colorListVC];
+    colorListNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Colors" image:nil tag:0];
+    
+    //initialize palette view controller
+    CRLPalettesViewController*  paletteListVC= [[CRLPalettesViewController alloc] initWithNibName:@"CRLPalettesViewController" bundle:[NSBundle mainBundle]];
+    UINavigationController* paletteListNav = [[UINavigationController alloc] initWithRootViewController:paletteListVC];
+    paletteListNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Palettes" image:nil tag:0];
+    
+    self.tbController = [[UITabBarController alloc] init];
+    self.tbController.viewControllers = @[colorListNav, paletteListNav];
+    self.window.rootViewController = self.tbController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

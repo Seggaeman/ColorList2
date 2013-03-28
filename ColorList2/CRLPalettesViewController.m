@@ -1,29 +1,26 @@
 //
-//  CRLViewController.m
+//  CRLPalettesViewController.m
 //  ColorList2
 //
-//  Created by HDM Ltd on 3/27/13.
+//  Created by HDM Ltd on 3/28/13.
 //  Copyright (c) 2013 HDM Ltd. All rights reserved.
 //
 
-#import "CRLViewController.h"
+#import "CRLPalettesViewController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <AFNetworking/AFNetworking.h>
-#import "CRLColors.h"
-#import "TitleDescriptionCell.h"
+#import "CRLPalettes.h"
+#import "CRLPaletteCell.h"
 #import "UIColor+HexString.h"
-#import "CRLColorDetailViewController.h"
 #import "URLBuilder.h"
-
-@interface CRLViewController ()
+#import <SDWebImage/UIImageView+WebCache.h>
+@interface CRLPalettesViewController ()
 {
-    NSMutableArray* colors;
+    NSMutableArray* palettes;
 }
-
--(void)downloadJSONDataFromURL:(NSString*)theURL;
 @end
 
-@implementation CRLViewController
+@implementation CRLPalettesViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,7 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self->colors = [[CRLColors allRecords] mutableCopy];
+        self->palettes = [[CRLPalettes allRecords] mutableCopy];
     }
     return self;
 }
@@ -47,7 +44,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self->colors = [[CRLColors allRecords] mutableCopy];
+    self.tableView.allowsMultipleSelection = TRUE;
+    //self->colors = [[CRLPalettes allRecords] mutableCopy];
     //application was crashing when this was placed in initWithNibName:bundle:
     //possibly because self.tableView hasn't been generated yet at that point.
     //[self.tableView registerNib:[UINib nibWithNibName:@"TitleDescriptionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"TitleDescriptionCell"];
@@ -57,16 +55,17 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    //NSLog(@"%d", [self->palettes count]);
     [self.navigationController setNavigationBarHidden:TRUE animated:YES];
     //retrieve text from standard user defaults
     NSUserDefaults* standards= [NSUserDefaults standardUserDefaults];
-    NSString* previousValue= (NSString*)[standards objectForKey:@"colorKeywords"];
+    NSString* previousValue= (NSString*)[standards objectForKey:@"paletteKeywords"];
     if (previousValue == nil)
-        [self downloadJSONDataFromURL:@"http://www.colourlovers.com/api/colors/new?format=json"];
+        [self downloadJSONDataFromURL:@"http://www.colourlovers.com/api/palettes/new?format=json"];
     else
     {
         NSDictionary* argumentsDict= @{@"format":@"json", @"keywords":previousValue};
-        NSString* urlString= [URLBuilder serializeURLString:@"http://www.colourlovers.com/api/colors/new?" withArguments:argumentsDict];
+        NSString* urlString= [URLBuilder serializeURLString:@"http://www.colourlovers.com/api/palettes/new?" withArguments:argumentsDict];
         [self downloadJSONDataFromURL:urlString];
         [self.searchBar setText:previousValue];
     }
@@ -75,17 +74,17 @@
 -(void)downloadJSONDataFromURL:(NSString *)theURL
 {
     //download JSON only if content array is empty
-    if ([self->colors count] == 0)
+    if ([self->palettes count] == 0)
     {
         NSURL *url = [NSURL URLWithString:theURL];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^void(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-            NSLog(@"%@", JSON); //the class is of type NSMutableArray. Apparently using SBJson won't be necessary.
+            //NSLog(@"%@", JSON); //the class is of type NSMutableArray. Apparently using SBJson won't be necessary.
             //save the color array.
             [(NSMutableArray*)JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                CRLColors* colorInstance = [[CRLColors newRecord] initWithDictionary:(NSDictionary*)obj];
-                [colorInstance save];
-                [self->colors addObject:colorInstance];
+                CRLPalettes* paletteInstance = [[CRLPalettes newRecord] initWithDictionary:(NSDictionary*)obj];
+                [paletteInstance save];
+                [self->palettes addObject:paletteInstance];
             }];
             [self.tableView reloadData];
             [SVProgressHUD showSuccessWithStatus:@"Done"];
@@ -112,49 +111,66 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self->colors count];
+    return [self->palettes count];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CRLColors* theColor = self->colors[indexPath.row];
+    CRLPalettes* thePalette = self->palettes[indexPath.row];
     
-    TitleDescriptionCell* theCell= [tableView dequeueReusableCellWithIdentifier:@"TitleDescriptionCell"];
+    CRLPaletteCell* theCell= [tableView dequeueReusableCellWithIdentifier:@"CRLPaletteCell"];
     
     if(theCell == nil)
     {
-        theCell = [[TitleDescriptionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TitleDescriptionCell"];
+        theCell = [[CRLPaletteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CRLPaletteCell"];
     }
-    theCell.titleLabel.text = theColor.title;
-    theCell.userNameLabel.text = theColor.userName;
-    [theCell.colorView setBackgroundColor:[UIColor colorWithHexString:theColor.colorString inverted:NO]];
-    
+    theCell.titleLabel.text = thePalette.title;
+    theCell.userNameLabel.text = thePalette.userName;
+    [theCell.paletteView setImageWithURL:[NSURL URLWithString:thePalette.imageUrl] placeholderImage:nil];
+    [theCell.paletteViewDummy setImage:theCell.paletteView.image];
+
+
     return theCell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CRLColors* colorInst= self->colors[indexPath.row];
-    CRLColorDetailViewController* leControlleur= [[CRLColorDetailViewController alloc] init];
-    leControlleur.colorInstance = colorInst;
-    [self.navigationController pushViewController:leControlleur animated:YES];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CRLPaletteCell* theCell= (CRLPaletteCell*)cell;
+    if (theCell.selected)
+    {
+        theCell.paletteViewDummy.hidden = FALSE;
+    }
+    else
+        theCell.paletteViewDummy.hidden = TRUE;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 #pragma mark - UISearchBarDelegate methods
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     //register the text in standard user defaults
     NSUserDefaults* standards= [NSUserDefaults standardUserDefaults];
-    [standards setObject:[searchBar text] forKey:@"colorKeywords"];
-
-    //NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"keywords"]);
-    NSDictionary* argumentsDict= @{@"format":@"json", @"keywords":[searchBar text]};
-    NSString* urlString= [URLBuilder serializeURLString:@"http://www.colourlovers.com/api/colors/new?" withArguments:argumentsDict];
+    [standards setObject:[searchBar text] forKey:@"paletteKeywords"];
     
-    [CRLColors dropAllRecords]; //clearDatabase deletes all the tables.
-    [self->colors removeAllObjects];
+    //NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"keywords"]);
+    NSDictionary* argumentsDict= @{@"format":@"json", @"paletteKeywords":[searchBar text]};
+    NSString* urlString= [URLBuilder serializeURLString:@"http://www.colourlovers.com/api/palettes/new?" withArguments:argumentsDict];
+    
+    [CRLPalettes dropAllRecords]; //clearDatabase deletes all the tables.
+    [self->palettes removeAllObjects];
     [self downloadJSONDataFromURL:urlString];
     [searchBar resignFirstResponder];
 }
@@ -162,4 +178,5 @@
 {
     [searchBar resignFirstResponder];
 }
+
 @end
