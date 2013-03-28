@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <iActiveRecord/ActiveRecord.h>
 
-@interface User : ActiveRecord
+@interface CRLUser : ActiveRecord
 
 @property (strong,nonatomic) NSString* userName;
 @property (strong, nonatomic) NSNumber* rating;

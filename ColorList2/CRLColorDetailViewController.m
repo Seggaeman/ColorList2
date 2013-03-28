@@ -12,7 +12,8 @@
 #import <AFNetworking/AFNetworking.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "NSString+URLEncoding.h"
-#import "User.h"
+#import "CRLUser.h"
+#import "CRLUserDetailViewController.h"
 
 @interface CRLColorDetailViewController ()
 @property (weak,nonatomic) IBOutlet UIView* colorView;
@@ -20,7 +21,7 @@
 @property (weak,nonatomic) IBOutlet UILabel* titleLabel;
 @property (weak,nonatomic) IBOutlet UILabel* userNameLabel;
 
-
+-(void) displayUser:(CRLUser*)theUser;
 @end
 
 @implementation CRLColorDetailViewController
@@ -58,26 +59,51 @@
 
 - (IBAction)showDetailsButtonClick:(id)sender
 {
-    //build the url
-    NSString* urlString = [@"http://www.colourlovers.com/api/lover/" stringByAppendingString:[self.colorInstance.userName urlEncodeUsingEncoding:NSUTF8StringEncoding]];
-    urlString = [urlString stringByAppendingString:@"?format=json"];
+    //Check if the entry exists
+    ARLazyFetcher* fetcher = [[CRLUser lazyFetcher] whereField:@"userName" equalToValue:self.colorInstance.userName];
+    NSArray* users= [fetcher fetchRecords];
     
-    NSLog(@"%@", urlString);
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^void(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        [SVProgressHUD showSuccessWithStatus:@"Done"];
-        //the JSON is a NSMutableArray containing one object. (Assume nevertheless that there can be several users)
-        [(NSMutableArray*)JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            User* colorOwner= [[User alloc] initWithDictionary:(NSDictionary*)obj];
-            NSString* details = [NSString stringWithFormat:@"Username: %@\nRating: %@\nLocation: %@\nNumColors: %@", colorOwner.userName, colorOwner.rating, colorOwner.location, colorOwner.numColors];
-            UIAlertView* detailAlert = [[UIAlertView alloc] initWithTitle:@"Details" message:details delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [detailAlert show];
+    if ([users count] > 0)
+    {
+        [users enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            CRLUser* colorOwner= (CRLUser*)obj;
+            [self displayUser:colorOwner];
         }];
     }
-    failure:^void(NSURLRequest *request, NSHTTPURLResponse* response, NSError* error, id JSON) {
-        [SVProgressHUD showErrorWithStatus:[error description]];
-    }];
-    [operation start];
-    [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeGradient];
+    else
+    {
+        NSString* urlString = [@"http://www.colourlovers.com/api/lover/" stringByAppendingString:[self.colorInstance.userName urlEncodeUsingEncoding:NSUTF8StringEncoding]];
+        urlString = [urlString stringByAppendingString:@"?format=json"];
+
+        NSLog(@"%@", urlString);
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+        AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^void(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            [SVProgressHUD showSuccessWithStatus:@"Done"];
+            //the JSON is a NSMutableArray containing one object. (Assume nevertheless that there can be several users)
+            [(NSMutableArray*)JSON enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                CRLUser* colorOwner= [[CRLUser newRecord] initWithDictionary:(NSDictionary*)obj];
+                [colorOwner save];
+                [self displayUser:colorOwner];
+            }];
+        }
+        failure:^void(NSURLRequest *request, NSHTTPURLResponse* response, NSError* error, id JSON) {
+            [SVProgressHUD showErrorWithStatus:[error description]];
+        }];
+        [operation start];
+        [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeGradient];
+    }
 }
+
+-(void)displayUser:(CRLUser *)theUser
+{
+    CRLUserDetailViewController* leControlleur = [[CRLUserDetailViewController alloc] init];
+    leControlleur.userInstance = theUser;
+    [self.navigationController pushViewController:leControlleur animated:YES];
+    /*
+    NSString* details = [NSString stringWithFormat:@"Username: %@\nRating: %@\nLocation: %@\nNumColors: %@", theUser.userName, theUser.rating, theUser.location, theUser.numColors];
+    UIAlertView* detailAlert = [[UIAlertView alloc] initWithTitle:@"Details" message:details delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [detailAlert show];
+    */
+}
+
 @end

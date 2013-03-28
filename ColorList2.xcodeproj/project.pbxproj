@@ -26,7 +26,9 @@
 		5701C0591702C8E8004DCF9C /* TitleDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5701C0581702C8E8004DCF9C /* TitleDescriptionCell.xib */; };
 		579CD7E217031FA000F35E3B /* URLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 579CD7E117031FA000F35E3B /* URLBuilder.m */; };
 		579CD7E5170321D400F35E3B /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 579CD7E4170321D400F35E3B /* NSString+URLEncoding.m */; };
-		57F1009817040ED900812F81 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F1009717040ED900812F81 /* User.m */; };
+		57F1009817040ED900812F81 /* CRLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F1009717040ED900812F81 /* CRLUser.m */; };
+		57F1009A17041CE500812F81 /* CRLUserDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57F1009917041CE500812F81 /* CRLUserDetailViewController.xib */; };
+		57F1009D1704210900812F81 /* CRLUserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57F1009C1704210900812F81 /* CRLUserDetailViewController.m */; };
 		E05F92A569D04B12B7B10DDD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A88C66E5BB8B4A67B9A4CFBB /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -61,8 +63,11 @@
 		579CD7E117031FA000F35E3B /* URLBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLBuilder.m; sourceTree = "<group>"; };
 		579CD7E3170321D400F35E3B /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		579CD7E4170321D400F35E3B /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
-		57F1009617040ED900812F81 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		57F1009717040ED900812F81 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		57F1009617040ED900812F81 /* CRLUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLUser.h; sourceTree = "<group>"; };
+		57F1009717040ED900812F81 /* CRLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLUser.m; sourceTree = "<group>"; };
+		57F1009917041CE500812F81 /* CRLUserDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRLUserDetailViewController.xib; sourceTree = "<group>"; };
+		57F1009B1704210900812F81 /* CRLUserDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLUserDetailViewController.h; sourceTree = "<group>"; };
+		57F1009C1704210900812F81 /* CRLUserDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLUserDetailViewController.m; sourceTree = "<group>"; };
 		A88C66E5BB8B4A67B9A4CFBB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C164FC7CBBB846CC8ADBC182 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -145,6 +150,7 @@
 				5701C0581702C8E8004DCF9C /* TitleDescriptionCell.xib */,
 				5701C04F1702C83A004DCF9C /* CRLColorDetailViewController.xib */,
 				5701C0451702BD8C004DCF9C /* CRLViewController.xib */,
+				57F1009917041CE500812F81 /* CRLUserDetailViewController.xib */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -158,6 +164,8 @@
 				5701C04D1702C81E004DCF9C /* CRLColorDetailViewController.m */,
 				5701C0431702BD7A004DCF9C /* CRLViewController.m */,
 				5701C0421702BD7A004DCF9C /* CRLViewController.h */,
+				57F1009B1704210900812F81 /* CRLUserDetailViewController.h */,
+				57F1009C1704210900812F81 /* CRLUserDetailViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -176,8 +184,8 @@
 			children = (
 				5701C0491702C802004DCF9C /* CRLColors.h */,
 				5701C04A1702C802004DCF9C /* CRLColors.m */,
-				57F1009617040ED900812F81 /* User.h */,
-				57F1009717040ED900812F81 /* User.m */,
+				57F1009617040ED900812F81 /* CRLUser.h */,
+				57F1009717040ED900812F81 /* CRLUser.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -262,6 +270,7 @@
 				5701C0461702BD8C004DCF9C /* CRLViewController.xib in Resources */,
 				5701C0501702C83A004DCF9C /* CRLColorDetailViewController.xib in Resources */,
 				5701C0591702C8E8004DCF9C /* TitleDescriptionCell.xib in Resources */,
+				57F1009A17041CE500812F81 /* CRLUserDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +307,8 @@
 				5701C0571702C8DF004DCF9C /* TitleDescriptionCell.m in Sources */,
 				579CD7E217031FA000F35E3B /* URLBuilder.m in Sources */,
 				579CD7E5170321D400F35E3B /* NSString+URLEncoding.m in Sources */,
-				57F1009817040ED900812F81 /* User.m in Sources */,
+				57F1009817040ED900812F81 /* CRLUser.m in Sources */,
+				57F1009D1704210900812F81 /* CRLUserDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

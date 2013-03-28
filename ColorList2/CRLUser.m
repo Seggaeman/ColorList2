@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 HDM Ltd. All rights reserved.
 //
 
-#import "User.h"
+#import "CRLUser.h"
 
-@implementation User
+@implementation CRLUser
 
 -(id)initWithDictionary:(NSDictionary *)infoDictionary
 {
