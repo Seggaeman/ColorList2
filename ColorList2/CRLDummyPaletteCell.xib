@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1552</int>
-		<string key="IBDocument.SystemVersion">12C54</string>
+		<string key="IBDocument.SystemVersion">12C3104</string>
 		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
@@ -46,6 +46,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 0}, {212, 21}}</string>
 								<reference key="NSSuperview" ref="434559474"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="436296121"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -55,15 +56,11 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">Titre</string>
-								<object class="NSColor" key="IBUITextColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MCAwIDAAA</bytes>
-									<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
-								</object>
-								<object class="NSColor" key="IBUIHighlightedColor" id="69315567">
+								<object class="NSColor" key="IBUITextColor" id="69315567">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
+								<reference key="IBUIHighlightedColor" ref="69315567"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
@@ -81,6 +78,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 34}, {212, 20}}</string>
 								<reference key="NSSuperview" ref="434559474"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="631835455"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -92,7 +90,7 @@
 								<string key="IBUIText">userName</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
+									<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
 								</object>
 								<reference key="IBUIHighlightedColor" ref="69315567"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -114,6 +112,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{320, 60}</string>
 								<reference key="NSSuperview" ref="434559474"/>
+								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -121,6 +120,7 @@
 						</array>
 						<string key="NSFrameSize">{320, 59}</string>
 						<reference key="NSSuperview" ref="252945956"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="411424973"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -136,8 +136,13 @@
 				</array>
 				<string key="NSFrameSize">{320, 60}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="434559474"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MAA</bytes>
+				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<reference key="IBUIContentView" ref="434559474"/>
 				<string key="IBUIReuseIdentifier">CRLDummyPaletteCell</string>
@@ -500,7 +505,45 @@
 			<nil key="sourceID"/>
 			<int key="maxID">20</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">CRLPaletteCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="paletteView">UIImageView</string>
+						<string key="titleLabel">UILabel</string>
+						<string key="userNameLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="paletteView">
+							<string key="name">paletteView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="titleLabel">
+							<string key="name">titleLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="userNameLabel">
+							<string key="name">userNameLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CRLPaletteCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSLayoutConstraint</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

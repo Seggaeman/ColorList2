@@ -44,6 +44,11 @@
     [self.colorViewLabel setText:[@"#" stringByAppendingString:self.colorInstance.colorString]];
     [self.titleLabel setText:self.colorInstance.title];
     [self.userNameLabel setText:self.colorInstance.userName];
+    UIButton* theButton = (UIButton*)[self.view viewWithTag:1];
+    UIImage* normalStateImage =[[UIImage imageNamed:@"button.png"] stretchableImageWithLeftCapWidth:5 topCapHeight:20];
+    UIImage* pressedStateImage= [[UIImage imageNamed:@"button_pressed.png"]stretchableImageWithLeftCapWidth:5 topCapHeight:20];
+    [theButton setBackgroundImage:normalStateImage forState:UIControlStateNormal];
+    [theButton setBackgroundImage:pressedStateImage forState:UIControlStateHighlighted];
 }
 
 -(void)viewDidAppear:(BOOL)animated
