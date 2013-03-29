@@ -29,6 +29,12 @@
 		571927B917055A250072A970 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 571927B517055A250072A970 /* button.png */; };
 		571927BA17055A250072A970 /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = 571927B617055A250072A970 /* color.png */; };
 		571927BB17055A250072A970 /* palette.png in Resources */ = {isa = PBXBuildFile; fileRef = 571927B717055A250072A970 /* palette.png */; };
+		571927BE170565990072A970 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 571927BD170565990072A970 /* CustomButton.m */; };
+		571927C017056B2B0072A970 /* CRLPatternViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 571927BF17056B2B0072A970 /* CRLPatternViewController.xib */; };
+		571927C31705706A0072A970 /* CRLPattern.m in Sources */ = {isa = PBXBuildFile; fileRef = 571927C21705706A0072A970 /* CRLPattern.m */; };
+		571927C61705724E0072A970 /* CRLPatternViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 571927C51705724E0072A970 /* CRLPatternViewController.m */; };
+		571927C9170574710072A970 /* CRLPatternCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 571927C8170574710072A970 /* CRLPatternCell.m */; };
+		571927CB170574910072A970 /* CRLPatternCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 571927CA170574910072A970 /* CRLPatternCell.xib */; };
 		5736D1C9170455C7005A37AC /* CRLPaletteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5736D1C8170455C7005A37AC /* CRLPaletteCell.xib */; };
 		5736D1CC1704564E005A37AC /* CRLPaletteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736D1CB1704564E005A37AC /* CRLPaletteCell.m */; };
 		579CD7E217031FA000F35E3B /* URLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 579CD7E117031FA000F35E3B /* URLBuilder.m */; };
@@ -74,6 +80,16 @@
 		571927B517055A250072A970 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = ColorList2/button.png; sourceTree = "<group>"; };
 		571927B617055A250072A970 /* color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = color.png; path = ColorList2/color.png; sourceTree = "<group>"; };
 		571927B717055A250072A970 /* palette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = palette.png; path = ColorList2/palette.png; sourceTree = "<group>"; };
+		571927BC170565990072A970 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
+		571927BD170565990072A970 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
+		571927BF17056B2B0072A970 /* CRLPatternViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRLPatternViewController.xib; sourceTree = "<group>"; };
+		571927C11705706A0072A970 /* CRLPattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLPattern.h; sourceTree = "<group>"; };
+		571927C21705706A0072A970 /* CRLPattern.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLPattern.m; sourceTree = "<group>"; };
+		571927C41705724E0072A970 /* CRLPatternViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLPatternViewController.h; sourceTree = "<group>"; };
+		571927C51705724E0072A970 /* CRLPatternViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLPatternViewController.m; sourceTree = "<group>"; };
+		571927C7170574710072A970 /* CRLPatternCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLPatternCell.h; sourceTree = "<group>"; };
+		571927C8170574710072A970 /* CRLPatternCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLPatternCell.m; sourceTree = "<group>"; };
+		571927CA170574910072A970 /* CRLPatternCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRLPatternCell.xib; sourceTree = "<group>"; };
 		5736D1C8170455C7005A37AC /* CRLPaletteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRLPaletteCell.xib; sourceTree = "<group>"; };
 		5736D1CA1704564E005A37AC /* CRLPaletteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLPaletteCell.h; sourceTree = "<group>"; };
 		5736D1CB1704564E005A37AC /* CRLPaletteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLPaletteCell.m; sourceTree = "<group>"; };
@@ -178,6 +194,8 @@
 				57F1009917041CE500812F81 /* CRLUserDetailViewController.xib */,
 				57F100A117042A6500812F81 /* CRLPalettesViewController.xib */,
 				5736D1C8170455C7005A37AC /* CRLPaletteCell.xib */,
+				571927BF17056B2B0072A970 /* CRLPatternViewController.xib */,
+				571927CA170574910072A970 /* CRLPatternCell.xib */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -197,6 +215,10 @@
 				57F1009F17042A3100812F81 /* CRLPalettesViewController.m */,
 				5736D1CA1704564E005A37AC /* CRLPaletteCell.h */,
 				5736D1CB1704564E005A37AC /* CRLPaletteCell.m */,
+				571927C41705724E0072A970 /* CRLPatternViewController.h */,
+				571927C51705724E0072A970 /* CRLPatternViewController.m */,
+				571927C7170574710072A970 /* CRLPatternCell.h */,
+				571927C8170574710072A970 /* CRLPatternCell.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -219,6 +241,10 @@
 				57F1009717040ED900812F81 /* CRLUser.m */,
 				57F100A817044B4700812F81 /* CRLPalettes.h */,
 				57F100A917044B4700812F81 /* CRLPalettes.m */,
+				571927BC170565990072A970 /* CustomButton.h */,
+				571927BD170565990072A970 /* CustomButton.m */,
+				571927C11705706A0072A970 /* CRLPattern.h */,
+				571927C21705706A0072A970 /* CRLPattern.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -322,6 +348,8 @@
 				571927B917055A250072A970 /* button.png in Resources */,
 				571927BA17055A250072A970 /* color.png in Resources */,
 				571927BB17055A250072A970 /* palette.png in Resources */,
+				571927C017056B2B0072A970 /* CRLPatternViewController.xib in Resources */,
+				571927CB170574910072A970 /* CRLPatternCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +391,10 @@
 				57F100A017042A3100812F81 /* CRLPalettesViewController.m in Sources */,
 				57F100AA17044B4700812F81 /* CRLPalettes.m in Sources */,
 				5736D1CC1704564E005A37AC /* CRLPaletteCell.m in Sources */,
+				571927BE170565990072A970 /* CustomButton.m in Sources */,
+				571927C31705706A0072A970 /* CRLPattern.m in Sources */,
+				571927C61705724E0072A970 /* CRLPatternViewController.m in Sources */,
+				571927C9170574710072A970 /* CRLPatternCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

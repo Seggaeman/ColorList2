@@ -12,6 +12,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "NSString+URLEncoding.h"
+#import "CustomButton.h"
 #import "CRLUser.h"
 #import "CRLUserDetailViewController.h"
 
@@ -44,11 +45,12 @@
     [self.colorViewLabel setText:[@"#" stringByAppendingString:self.colorInstance.colorString]];
     [self.titleLabel setText:self.colorInstance.title];
     [self.userNameLabel setText:self.colorInstance.userName];
-    UIButton* theButton = (UIButton*)[self.view viewWithTag:1];
-    UIImage* normalStateImage =[[UIImage imageNamed:@"button.png"] stretchableImageWithLeftCapWidth:5 topCapHeight:20];
-    UIImage* pressedStateImage= [[UIImage imageNamed:@"button_pressed.png"]stretchableImageWithLeftCapWidth:5 topCapHeight:20];
-    [theButton setBackgroundImage:normalStateImage forState:UIControlStateNormal];
-    [theButton setBackgroundImage:pressedStateImage forState:UIControlStateHighlighted];
+    CustomButton* theButton= [CustomButton buttonWithType:UIButtonTypeCustom];
+    theButton.frame = CGRectMake(20,168,280,31);
+    [theButton addTarget:self action:@selector(showDetailsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [theButton setTitle:@"Afficher les details d'utilisateur" forState:UIControlStateNormal];
+    [theButton awakeFromNib];
+    [self.view addSubview:theButton];
 }
 
 -(void)viewDidAppear:(BOOL)animated

@@ -9,7 +9,7 @@
 #import "CRLAppDelegate.h"
 #import "CRLViewController.h"
 #import "CRLPalettesViewController.h"
-
+#import "CRLPatternViewController.h"
 @implementation CRLAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -29,8 +29,12 @@
     UINavigationController* paletteListNav = [[UINavigationController alloc] initWithRootViewController:paletteListVC];
     paletteListNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Palettes" image:[UIImage imageNamed:@"palette.png"] tag:0];
     
+    //initialize pattern view controller.
+    CRLPatternViewController* patternVC = [[CRLPatternViewController alloc] initWithNibName:@"CRLPatternViewController" bundle:[NSBundle mainBundle]];
+    patternVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Patterns" image:nil tag:0];
+    
     self.tbController = [[UITabBarController alloc] init];
-    self.tbController.viewControllers = @[colorListNav, paletteListNav];
+    self.tbController.viewControllers = @[colorListNav, paletteListNav, patternVC];
     self.window.rootViewController = self.tbController;
     
     self.window.backgroundColor = [UIColor whiteColor];

@@ -122,10 +122,7 @@
     
     CRLPaletteCell* theCell= [tableView dequeueReusableCellWithIdentifier:@"CRLPaletteCell"];
     CRLPaletteCell* theCell2 = [tableView dequeueReusableCellWithIdentifier:@"CRLDummyPaletteCell"];
-    /*if(theCell == nil)
-    {
-        theCell = [[CRLPaletteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CRLPaletteCell"];
-    }*/
+
     theCell.titleLabel.text = theCell2.titleLabel.text = thePalette.title;
     theCell.userNameLabel.text = theCell2.userNameLabel.text = thePalette.userName;
     
