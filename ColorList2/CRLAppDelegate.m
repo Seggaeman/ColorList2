@@ -22,12 +22,12 @@
     //initialize color list view controller
     CRLViewController* colorListVC= [[CRLViewController alloc] initWithNibName:@"CRLViewController" bundle:[NSBundle mainBundle]];
     UINavigationController* colorListNav = [[UINavigationController alloc] initWithRootViewController:colorListVC];
-    colorListNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Colors" image:nil tag:0];
+    colorListNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Colors" image:[UIImage imageNamed:@"color.png"] tag:0];
     
     //initialize palette view controller
     CRLPalettesViewController*  paletteListVC= [[CRLPalettesViewController alloc] initWithNibName:@"CRLPalettesViewController" bundle:[NSBundle mainBundle]];
     UINavigationController* paletteListNav = [[UINavigationController alloc] initWithRootViewController:paletteListVC];
-    paletteListNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Palettes" image:nil tag:0];
+    paletteListNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Palettes" image:[UIImage imageNamed:@"palette.png"] tag:0];
     
     self.tbController = [[UITabBarController alloc] init];
     self.tbController.viewControllers = @[colorListNav, paletteListNav];

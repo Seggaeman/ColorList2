@@ -34,7 +34,7 @@
 }
 -(id)init
 {
-    NSLog(@"init");
+    //NSLog(@"init");
     if (self= [super init])
     {
         
@@ -48,7 +48,8 @@
     //self->colors = [[CRLPalettes allRecords] mutableCopy];
     //application was crashing when this was placed in initWithNibName:bundle:
     //possibly because self.tableView hasn't been generated yet at that point.
-    //[self.tableView registerNib:[UINib nibWithNibName:@"TitleDescriptionCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"TitleDescriptionCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"CRLPaletteCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CRLPaletteCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"CRLDummyPaletteCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CRLDummyPaletteCell"];    
     // Do any additional setup after loading the view.
 }
 
@@ -95,6 +96,7 @@
         [operation start];
         [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeGradient];
     }
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -119,18 +121,29 @@
     CRLPalettes* thePalette = self->palettes[indexPath.row];
     
     CRLPaletteCell* theCell= [tableView dequeueReusableCellWithIdentifier:@"CRLPaletteCell"];
-    
-    if(theCell == nil)
+    CRLPaletteCell* theCell2 = [tableView dequeueReusableCellWithIdentifier:@"CRLDummyPaletteCell"];
+    /*if(theCell == nil)
     {
         theCell = [[CRLPaletteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CRLPaletteCell"];
-    }
-    theCell.titleLabel.text = thePalette.title;
-    theCell.userNameLabel.text = thePalette.userName;
+    }*/
+    theCell.titleLabel.text = theCell2.titleLabel.text = thePalette.title;
+    theCell.userNameLabel.text = theCell2.userNameLabel.text = thePalette.userName;
+    
     [theCell.paletteView setImageWithURL:[NSURL URLWithString:thePalette.imageUrl] placeholderImage:nil];
-    [theCell.paletteViewDummy setImage:theCell.paletteView.image];
-
-
-    return theCell;
+    [theCell2.paletteView setImageWithURL:[NSURL URLWithString:thePalette.imageUrl] placeholderImage:nil];
+    
+    if ([thePalette.isSelected isEqualToNumber:[NSNumber numberWithInt:NO]])
+    {
+        theCell.selected = NO;
+        //NSLog(@"not selected");
+        return theCell;
+    }
+    else
+    {
+        theCell2.selected = YES;
+        //NSLog(@"selected");
+        return theCell2;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -140,22 +153,20 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CRLPaletteCell* theCell= (CRLPaletteCell*)cell;
-    if (theCell.selected)
-    {
-        theCell.paletteViewDummy.hidden = FALSE;
-    }
-    else
-        theCell.paletteViewDummy.hidden = TRUE;
+
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    CRLPalettes* lePalet= self->palettes[indexPath.row];
+    lePalet.isSelected = [NSNumber numberWithInt:YES];
+    //[lePalet save];
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    CRLPalettes* lePalet= self->palettes[indexPath.row];
+    lePalet.isSelected = [NSNumber numberWithInt:NO];
+    //[lePalet save];
 }
 #pragma mark - UISearchBarDelegate methods
 
@@ -166,7 +177,7 @@
     [standards setObject:[searchBar text] forKey:@"paletteKeywords"];
     
     //NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"keywords"]);
-    NSDictionary* argumentsDict= @{@"format":@"json", @"paletteKeywords":[searchBar text]};
+    NSDictionary* argumentsDict= @{@"format":@"json", @"keywords":[searchBar text]};
     NSString* urlString= [URLBuilder serializeURLString:@"http://www.colourlovers.com/api/palettes/new?" withArguments:argumentsDict];
     
     [CRLPalettes dropAllRecords]; //clearDatabase deletes all the tables.

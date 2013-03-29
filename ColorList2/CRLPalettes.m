@@ -17,6 +17,7 @@
         self.userName = pDictionary[@"userName"];
         self.title= pDictionary[@"title"];
         self.imageUrl = pDictionary[@"imageUrl"];
+        self.isSelected = [NSNumber numberWithInt:NO];
     }
     return self;
 }

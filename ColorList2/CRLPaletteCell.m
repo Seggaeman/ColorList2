@@ -15,8 +15,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        NSArray *nib= [[NSBundle mainBundle] loadNibNamed:@"CRLPaletteCell" owner:self options:nil];
-        self = nib[0];
+        //NSArray *nib= [[NSBundle mainBundle] loadNibNamed:@"CRLPaletteCell" owner:self options:nil];
+        //self = nib[0];
     }
     return self;
 }
@@ -30,14 +30,10 @@
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5f];
         self.paletteView.frame= CGRectMake(0.0, 0.0, 320.0, 60.0);
-        [UIView commitAnimations];
+        //[UIView commitAnimations];
     }
     else
     {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5f];
-        self.paletteViewDummy.hidden = TRUE;
-        [UIView commitAnimations];
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5f];
         self.paletteView.frame= CGRectMake(260.0, 0.0, 60.0, 60.0);

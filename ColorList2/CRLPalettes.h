@@ -11,6 +11,7 @@
 
 @interface CRLPalettes: ActiveRecord
 
+@property (assign,nonatomic) NSNumber* isSelected;
 @property (strong, nonatomic) NSString* title;
 @property (strong, nonatomic) NSString* userName;
 @property (strong,nonatomic) NSString* imageUrl;

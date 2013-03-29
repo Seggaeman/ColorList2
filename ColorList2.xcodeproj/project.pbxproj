@@ -24,6 +24,11 @@
 		5701C0541702C8BD004DCF9C /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5701C0531702C8BD004DCF9C /* UIColor+HexString.m */; };
 		5701C0571702C8DF004DCF9C /* TitleDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5701C0561702C8DF004DCF9C /* TitleDescriptionCell.m */; };
 		5701C0591702C8E8004DCF9C /* TitleDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5701C0581702C8E8004DCF9C /* TitleDescriptionCell.xib */; };
+		571927B2170559300072A970 /* CRLDummyPaletteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 571927B1170559300072A970 /* CRLDummyPaletteCell.xib */; };
+		571927B817055A250072A970 /* button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 571927B417055A250072A970 /* button_pressed.png */; };
+		571927B917055A250072A970 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 571927B517055A250072A970 /* button.png */; };
+		571927BA17055A250072A970 /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = 571927B617055A250072A970 /* color.png */; };
+		571927BB17055A250072A970 /* palette.png in Resources */ = {isa = PBXBuildFile; fileRef = 571927B717055A250072A970 /* palette.png */; };
 		5736D1C9170455C7005A37AC /* CRLPaletteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5736D1C8170455C7005A37AC /* CRLPaletteCell.xib */; };
 		5736D1CC1704564E005A37AC /* CRLPaletteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5736D1CB1704564E005A37AC /* CRLPaletteCell.m */; };
 		579CD7E217031FA000F35E3B /* URLBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 579CD7E117031FA000F35E3B /* URLBuilder.m */; };
@@ -64,6 +69,11 @@
 		5701C0551702C8DF004DCF9C /* TitleDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleDescriptionCell.h; sourceTree = "<group>"; };
 		5701C0561702C8DF004DCF9C /* TitleDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleDescriptionCell.m; sourceTree = "<group>"; };
 		5701C0581702C8E8004DCF9C /* TitleDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleDescriptionCell.xib; sourceTree = "<group>"; };
+		571927B1170559300072A970 /* CRLDummyPaletteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRLDummyPaletteCell.xib; sourceTree = "<group>"; };
+		571927B417055A250072A970 /* button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_pressed.png; path = ColorList2/button_pressed.png; sourceTree = "<group>"; };
+		571927B517055A250072A970 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = ColorList2/button.png; sourceTree = "<group>"; };
+		571927B617055A250072A970 /* color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = color.png; path = ColorList2/color.png; sourceTree = "<group>"; };
+		571927B717055A250072A970 /* palette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = palette.png; path = ColorList2/palette.png; sourceTree = "<group>"; };
 		5736D1C8170455C7005A37AC /* CRLPaletteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRLPaletteCell.xib; sourceTree = "<group>"; };
 		5736D1CA1704564E005A37AC /* CRLPaletteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRLPaletteCell.h; sourceTree = "<group>"; };
 		5736D1CB1704564E005A37AC /* CRLPaletteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRLPaletteCell.m; sourceTree = "<group>"; };
@@ -103,6 +113,7 @@
 		5701C00F1702B32D004DCF9C = {
 			isa = PBXGroup;
 			children = (
+				571927B317055A0C0072A970 /* Images */,
 				5701C0211702B32D004DCF9C /* ColorList2 */,
 				5701C01A1702B32D004DCF9C /* Frameworks */,
 				5701C0191702B32D004DCF9C /* Products */,
@@ -160,6 +171,7 @@
 		5701C0401702BD62004DCF9C /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				571927B1170559300072A970 /* CRLDummyPaletteCell.xib */,
 				5701C0581702C8E8004DCF9C /* TitleDescriptionCell.xib */,
 				5701C04F1702C83A004DCF9C /* CRLColorDetailViewController.xib */,
 				5701C0451702BD8C004DCF9C /* CRLViewController.xib */,
@@ -220,6 +232,17 @@
 				5701C0531702C8BD004DCF9C /* UIColor+HexString.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		571927B317055A0C0072A970 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				571927B417055A250072A970 /* button_pressed.png */,
+				571927B517055A250072A970 /* button.png */,
+				571927B617055A250072A970 /* color.png */,
+				571927B717055A250072A970 /* palette.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		579CD7B517031EBC00F35E3B /* Helpers */ = {
@@ -294,6 +317,11 @@
 				57F1009A17041CE500812F81 /* CRLUserDetailViewController.xib in Resources */,
 				57F100A217042A6500812F81 /* CRLPalettesViewController.xib in Resources */,
 				5736D1C9170455C7005A37AC /* CRLPaletteCell.xib in Resources */,
+				571927B2170559300072A970 /* CRLDummyPaletteCell.xib in Resources */,
+				571927B817055A250072A970 /* button_pressed.png in Resources */,
+				571927B917055A250072A970 /* button.png in Resources */,
+				571927BA17055A250072A970 /* color.png in Resources */,
+				571927BB17055A250072A970 /* palette.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

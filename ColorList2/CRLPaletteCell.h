@@ -13,6 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel* titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel* userNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView* paletteView;
-@property (weak, nonatomic) IBOutlet UIImageView* paletteViewDummy;
 
 @end
