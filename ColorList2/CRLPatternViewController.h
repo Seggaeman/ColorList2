@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <KANibHelper/KAViewController.h>
 
-@interface CRLPatternViewController : UIViewController <UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface CRLPatternViewController : KAViewController <UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak,nonatomic) IBOutlet UICollectionView* collectionView;
 @property (weak,nonatomic) IBOutlet UISearchBar* searchBar;

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <KANibHelper/KAViewController.h>
 
-@interface CRLViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface CRLViewController : KAViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar* searchBar;

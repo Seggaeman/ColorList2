@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CRLColors.h"
+#import <KANibHelper/KAViewController.h>
 
-@interface CRLColorDetailViewController : UIViewController
+@interface CRLColorDetailViewController : KAViewController
 
 @property (strong, nonatomic) CRLColors* colorInstance;
 

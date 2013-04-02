@@ -121,8 +121,12 @@
     
     CRLPatternCell* laCellule= [collectionView dequeueReusableCellWithReuseIdentifier:@"CRLPatternCell" forIndexPath:indexPath];
     
-    [laCellule.patternImage setImageWithURL:[NSURL URLWithString:thePattern.imageUrl]];
+    //[laCellule.patternImage setImageWithURL:[NSURL URLWithString:thePattern.imageUrl]];
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];    
+    [laCellule.patternImage setImageWithURL:[NSURL URLWithString:thePattern.imageUrl] placeholderImage:nil completed:^void(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
     return laCellule;
 }
 

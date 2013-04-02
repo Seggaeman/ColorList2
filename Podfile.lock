@@ -1,6 +1,7 @@
 
 PODS: 
 - AFNetworking (0.10.1)
+- KANibHelper (0.1)
 - SBJson (3.1)
 - SDWebImage (3.2): 
   - SDWebImage/MapKit (= 3.2)
@@ -9,18 +10,24 @@ PODS:
 - iActiveRecord (1.3.0)
 
 SPEC CHECKSUMS: 
-  SDWebImage: 8082fe8d658ccafaaecd9e5ecda12ed01f09ba9c
   SVProgressHUD: 98935fbafaf0031df4a9cafca3c66eaf3da06967
-  iActiveRecord: 5dd0ababe9b7ea1764da0d21d9f3fe61c73172ce
   SDWebImage/MapKit: 8082fe8d658ccafaaecd9e5ecda12ed01f09ba9c
-  SBJson: 0c76c1e4ec7c4fbf9c9c0d9fa78cb3c5743cbe9a
+  SDWebImage: 8082fe8d658ccafaaecd9e5ecda12ed01f09ba9c
+  iActiveRecord: 5dd0ababe9b7ea1764da0d21d9f3fe61c73172ce
+  KANibHelper: 664a1554bac8d619de038e248f0e5422a360084b
   AFNetworking: df1042246c17373b96f12f04bf5c6e1c25992cd4
+  SBJson: 0c76c1e4ec7c4fbf9c9c0d9fa78cb3c5743cbe9a
+
+COCOAPODS: 0.16.4
 
 DEPENDENCIES: 
 - AFNetworking (= 0.10.1)
+- KANibHelper (from `https://github.com/kirualex/KANibHelper.git')
 - SBJson (= 3.1)
 - SDWebImage (= 3.2)
 - SVProgressHUD
 - iActiveRecord (= 1.3.0)
 
-COCOAPODS: 0.16.4
+EXTERNAL SOURCES: 
+  KANibHelper: 
+    :git: https://github.com/kirualex/KANibHelper.git

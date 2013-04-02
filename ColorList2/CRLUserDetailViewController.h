@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <KANibHelper/KAViewController.h>
 
 @class CRLUser;
-@interface CRLUserDetailViewController : UIViewController
+@interface CRLUserDetailViewController : KAViewController
 
 @property (strong,nonatomic) CRLUser* userInstance;
 @property (weak,nonatomic) IBOutlet UILabel* userNameLabel;
